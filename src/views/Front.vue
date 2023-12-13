@@ -41,7 +41,9 @@ export default {
             </tr>
             <tr>
                 <td></td>
-                <td></td>
+                <td>
+                    <RouterLink to="/FrontInside" class="link">問卷名稱</RouterLink>
+                </td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -217,13 +219,15 @@ export default {
         background-color: rgb(227, 227, 227);
     }
 }
-.footer{
-    ul{
+
+.footer {
+    ul {
         display: flex;
         justify-content: center;
     }
-    li{
-        list-style:none;
+
+    li {
+        list-style: none;
         margin-left: 5px;
     }
 }

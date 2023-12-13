@@ -43,11 +43,11 @@ export default {
         <tr>
             <td><input type="checkbox" name="" id=""></td>
             <td></td>
-            <td>我我我我我午我我我五</td>
+            <td><RouterLink :to="`/BackManage2`" class="rounterItem">問卷名稱</RouterLink></td>
             <td>我我我我</td>
             <td></td>
             <td></td>
-            <td><RouterLink :to="`/FrontStatistics`" class="rounterItem">前往</RouterLink></td>
+            <td><RouterLink :to="`/BackStatistics`" class="rounterItem">前往</RouterLink></td>
         </tr>
         <tr>
             <td></td>

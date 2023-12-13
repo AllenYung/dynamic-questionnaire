@@ -1,35 +1,82 @@
 <script>
+import { mapState, mapActions } from 'pinia'
+import counter from '../stores/counter'
 export default {
-    data(){
-
+    data() {
     },
+    computed: {
+        ...mapState(counter, ["userData"])
+    },
+    methods: {
+        inWeb() {
+
+            let qDate = this.userData.qDate;
+            let qTitle = this.userData.qTitle;
+            let qText = this.userData.qText;
+            let name = this.userData.name;
+            let tel = this.userData.tel;
+            let email = this.userData.email;
+            let agee = parseInt(this.userData.age);
+            let dataArr =[];
+
+            let data = this.userData.value
+            
+            //每筆資料存進去就不會不見了
+            if (JSON.parse(localStorage.getItem("data")) !== null) {
+                dataArr = JSON.parse(localStorage.getItem("data"))
+            } else {
+                dataArr = [];
+            }
+            let dataObj = {
+                // Data:this.userData,
+                Date: qDate,
+                Title: qTitle,
+                Text: qText,
+                personName: name,
+                phone: tel,
+                mail: email,
+                age: agee,
+
+            };
+            // dataArr.push(dataObj)
+            //將上述自訂的陣列dataObj推到最外面大的dataArr裡面
+            dataArr.push(dataObj),
+            //將dataArr放置在data裡面的json
+            localStorage.setItem("data", JSON.stringify(dataArr))
+        }
+    }
 }
 </script>
 <template>
-    <div class="header">
-        <div class="title">
-
-            <p>000</p>
-            <span>00000000</span>
-        </div>
+    <div class="time">
+        <p>問卷填寫時間</p>
+        <span>{{ userData.qDate }}</span>
+    </div>
+    <div class="title">
+        <p>問卷名稱</p>
+        <span>{{ userData.qTitle }}</span>
+    </div>
+    <div class="produce">
+        <p>問卷介紹</p>
+        <span>{{ userData.qText }}</span>
     </div>
     <div class="content">
         <div class="information">
             <div class="one">
-                <span>姓名：</span>
-                <input type="text" name="" id="">
+                <label>姓名：</label>
+                <span>{{ userData.name }}</span>
             </div>
             <div class="two">
-                <span>手機：</span>
-                <input type="tel" name="" id="">
+                <label>手機：</label>
+                <span>{{ userData.tel }}</span>
             </div>
             <div class="three">
-                <span>E-mail：</span>
-                <input type="emil" name="" id="">
+                <label>E-mail：</label>
+                <span>{{ userData.email }}</span>
             </div>
             <div class="four">
-                <span>年齡：</span>
-                <input type="number" name="" id="">
+                <label>年齡：</label>
+                <span>{{ userData.age }}</span>
             </div>
         </div>
         <div class="question">
@@ -40,74 +87,87 @@ export default {
     </div>
     <div class="footer">
 
-        <button type="submit"><RouterLink :to="`/FrontInside`" class="rounterItem">修改</RouterLink></button>
-        <button type="submit">送出</button>
+        <button type="submit" class="rounterItem">
+            <RouterLink :to="`/FrontInside`">修改</RouterLink>
+        </button>
+        <button type="submit" class="rounterItem" @click="inWeb">送出</button>
     </div>
-
 </template>
 
 <style scoped lang="scss">
-.header{
-    padding-top: 50px;
-    display: flex;
-    justify-content: center;
-    
-    .title{
-
-        width: 800px;
-        height: 150px;
-        position: relative;
-        border: 1px solid black;
-
-        p{
-            font-size: 50px;
-        }
-        span{
-            position: absolute;
-            left: 50px;
-            font-size: 25px;
-        }
-    }
+.time {
+    width: 30vw;
+    height: 7vh;
+    margin-left: 40%;
+    margin-top: 3%;
+    font-size: 16px;
+    border: 1px solid black;
 }
-.content{
+
+.title {
+    width: 80vw;
+    height: 10vh;
+    font-size: 28px;
+    border: 1px solid black
+}
+
+.produce {
+    width: 80vw;
+    height: 15vh;
+    font-size: 28px;
+    border: 1px solid black
+}
+
+.content {
     display: flex;
     justify-content: center;
-    .information{
+
+    .information {
         width: 800px;
         height: 300px;
         border: 1px solid black;
         font-size: large;
         position: relative;
-        span{
+
+        span {
             width: 70px;
             position: absolute;
             left: 50px;
         }
-        input{
+
+        input {
             position: absolute;
             width: 500px;
             height: 25px;
             left: 200px;
         }
-        .one{
+
+        .one {
             position: absolute;
             top: 20px;
         }
-        .two{
+
+        .two {
             position: absolute;
             top: 80px;
         }
-        .three{
+
+        .three {
             position: absolute;
             top: 140px;
         }
-        .four{
+
+        .four {
             position: absolute;
             top: 200px;
         }
     }
 }
-.footer{
 
+.footer {
+    .rounterItem {
+        margin-left: 10px;
+        text-decoration: none;
+    }
 }
 </style>

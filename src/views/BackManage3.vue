@@ -6,6 +6,12 @@ export default {
 }
 </script>
 <template>
+        <div class="header">
+        <RouterLink to="/BackManage1" class="link">問卷</RouterLink>
+        <RouterLink to="/BackManage2" class="link">題目</RouterLink>
+        <RouterLink to="/BackManage3" class="link">問卷回饋</RouterLink>
+        <RouterLink to="/BackManage4" class="link">BackManage4</RouterLink>
+    </div>
     <div class="content">
         <div class="list">
             <table>
@@ -27,6 +33,16 @@ export default {
 </template>
 
 <style scoped lang="scss">
+.header{
+    width: 90vw;
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+    .link{
+        text-decoration: none;
+        margin-left: 10px;
+    }
+}
 .content{
     .list{
         display: flex;

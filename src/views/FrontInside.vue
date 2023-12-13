@@ -1,35 +1,64 @@
 <script>
+import check from '../views/frontChack.vue'
+import { computed } from "vue";
+import { ref, provide } from "vue";
+import { mapState, mapActions } from 'pinia'
+import counter from '../stores/counter'
 export default {
-    data(){
-
+    data() {
+        return {
+        }
+    },
+    methods: {
+        ...mapActions(counter, ["setData"]),
+    },
+    components: {
+        check,
+    },
+    // provide() {
+    //     return {
+    //         nameIn: computed(() => this.name),
+    //         telIn: computed(() => this.tel),
+    //         emailIn: computed(() => this.email),
+    //         ageIn: computed(() => this.age),
+    //     }
+    // },
+    computed: {
+        ...mapState(counter, ["userData"]),
     },
 }
 </script>
 <template>
-    <div class="header">
-        <div class="title">
+    <div class="time">
+        <p>問卷填寫時間</p>
+        <input type="time" v-model="this.userData.qDate">
 
-            <p>000</p>
-            <span>00000000</span>
-        </div>
+    </div>
+    <div class="title">
+        <p>問卷名稱</p>
+        <input type="text" class="titleIn" v-model="this.userData.qTitle" >
+    </div>
+    <div class="produce">
+        <p>問卷介紹</p>
+        <textarea name="" id="" cols="30" rows="10" v-model="this.userData.qText"></textarea>
     </div>
     <div class="content">
         <div class="information">
             <div class="one">
-                <span>姓名：</span>
-                <input type="text" name="" id="">
+                <label>姓名：</label>
+                <input type="text" name="name" id="name" v-model="this.userData.name">
             </div>
             <div class="two">
-                <span>手機：</span>
-                <input type="tel" name="" id="">
+                <label>手機：</label>
+                <input type="tel" name="tel" id="tel" v-model="this.userData.tel">
             </div>
             <div class="three">
-                <span>E-mail：</span>
-                <input type="emil" name="" id="">
+                <label>E-mail：</label>
+                <input type="emil" name="email" id="email" v-model="this.userData.email">
             </div>
             <div class="four">
-                <span>年齡：</span>
-                <input type="number" name="" id="">
+                <label>年齡：</label>
+                <input type="number" name="age" id="age" v-model="this.userData.age">
             </div>
         </div>
         <div class="question">
@@ -39,75 +68,101 @@ export default {
         </div>
     </div>
     <div class="footer">
-
-        <button type="submit"><RouterLink :to="`/Front`" class="rounterItem">取消</RouterLink></button>
-        <button type="submit"><RouterLink :to="`/FrontChack`" class="rounterItem">送出</RouterLink></button>
+        <button type="submit" class="rounterItem">
+            <RouterLink :to="`/Front`">取消</RouterLink>
+        </button>
+        <button type="submit" class="rounterItem" @click="">
+            <RouterLink :to="`/FrontChack`">送出</RouterLink>
+        </button>
     </div>
-
 </template>
 
 <style scoped lang="scss">
-.header{
-    padding-top: 50px;
-    display: flex;
-    justify-content: center;
-    
-    .title{
+.time {
+    width: 30vw;
+    height: 7vh;
+    margin-left: 40%;
+    margin-top: 3%;
+    font-size: 16px;
+    border: 1px solid black;
+}
 
-        width: 800px;
-        height: 150px;
-        position: relative;
-        border: 1px solid black;
+.title {
+    width: 80vw;
+    height: 10vh;
+    font-size: 28px;
+    border: 1px solid black;
 
-        p{
-            font-size: 50px;
-        }
-        span{
-            position: absolute;
-            left: 50px;
-            font-size: 25px;
-        }
+    .titleIn {
+        width: 50vw;
+        height: 5vh;
+        font-size: 20px;
     }
 }
-.content{
+
+.produce {
+    width: 80vw;
+    height: 15vh;
+    font-size: 28px;
+    border: 1px solid black
+}
+
+textarea {
+    width: 80%;
+    height: 10vh;
+}
+
+
+.content {
     display: flex;
     justify-content: center;
-    .information{
+
+    .information {
         width: 800px;
         height: 300px;
         border: 1px solid black;
         font-size: large;
         position: relative;
-        span{
+
+        span {
             width: 70px;
             position: absolute;
             left: 50px;
         }
-        input{
+
+        input {
             position: absolute;
             width: 500px;
             height: 25px;
             left: 200px;
         }
-        .one{
+
+        .one {
             position: absolute;
             top: 20px;
         }
-        .two{
+
+        .two {
             position: absolute;
             top: 80px;
         }
-        .three{
+
+        .three {
             position: absolute;
             top: 140px;
         }
-        .four{
+
+        .four {
             position: absolute;
             top: 200px;
         }
     }
 }
-.footer{
 
+.footer {
+    .rounterItem {
+        margin-left: 10px;
+        text-decoration: none;
+    }
 }
 </style>
